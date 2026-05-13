@@ -4,7 +4,7 @@ services:
     name: serp-parser-ui
     runtime: python
     buildCommand: pip install -r requirements.txt
-    startCommand: python -m streamlit run app.py --server.port $PORT --server.address 0.0.0.0
+    startCommand: python run app.py --server.port $PORT --server.address 0.0.0.0
     envVars:
       - key: TG_BOT_TOKEN
         value: 8683656869:AAEZb8YZmgjUFCHXVFQ1f_C6qq-Nx64dBKU

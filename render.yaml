@@ -1,0 +1,26 @@
+services:
+  # Streamlit веб-інтерфейс
+  - type: web
+    name: serp-parser-ui
+    runtime: python
+    buildCommand: pip install -r requirements.txt
+    startCommand: streamlit run app.py --server.port $PORT --server.address 0.0.0.0
+    envVars:
+      - key: TG_BOT_TOKEN
+        value: 8683656869:AAEZb8YZmgjUFCHXVFQ1f_C6qq-Nx64dBKU
+      - key: TG_CHAT_ID
+        value: "909587225"
+
+  # Автопарсер (фоновий воркер)
+  - type: worker
+    name: serp-parser-scheduler
+    runtime: python
+    buildCommand: pip install -r requirements.txt
+    startCommand: python scheduler.py
+    envVars:
+      - key: TG_BOT_TOKEN
+        value: 8683656869:AAEZb8YZmgjUFCHXVFQ1f_C6qq-Nx64dBKU
+      - key: TG_CHAT_ID
+        value: "909587225"
+      - key: AUTO_INTERVAL_HOURS
+        value: "3"
